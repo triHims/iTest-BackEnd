@@ -1,51 +1,51 @@
 {
-  "TaskID" :  "TASK1",
-  "NoOfSteps" : "7",
-  "StepList" : [
+  "taskID" :  "TASK1",
+  "noOfSteps" : 7,
+  "stepList" : [
     {
-      "StepNo" :  1,
-      "StepType" :  "Boolean",
-      "Progress" :  "NotAttempted/Success/Failure/Aborted",
-      "Value" :  "true"
+      "stepNo" :  1,
+      "stepType" :  "Boolean",
+      "progress" :  "NotAttempted/Success/Failure/Aborted",
+      "value" :  "true"
 
     },
     {
-      "StepNo" :  2,
-      "StepType" :  "boolean",
-      "Progress" :  "NotAttempted/Success/Failure/Aborted",
-      "Value" :  "false"
+      "stepNo" :  2,
+      "stepType" :  "boolean",
+      "progress" :  "NotAttempted/Success/Failure/Aborted",
+      "value" :  "false"
 
     },
 
     {
-      "StepNo" :  3,
-      "StepType" :  "boolean",
-      "Progress" :  "NotAttempted/Success/Failure/Aborted",
-      "Value" :  "true"
+      "stepNo" :  3,
+      "stepType" :  "boolean",
+      "progress" :  "NotAttempted/Success/Failure/Aborted",
+      "value" :  "true"
     },
     {
-      "StepNo" :  4,
-      "StepType" :  "boolean",
-      "Progress" :  "NotAttempted/Success/Failure/Aborted",
-      "Value" :  "true"
+      "stepNo" :  4,
+      "stepType" :  "boolean",
+      "progress" :  "NotAttempted/Success/Failure/Aborted",
+      "value" :  "true"
     },
     {
-      "StepNo" :  5,
-      "StepType" :  "rating",
-      "Progress" :  "NotAttempted/Success/Failure/Aborted",
-      "Value" :  "1"
+      "stepNo" :  5,
+      "stepType" :  "rating",
+      "progress" :  "NotAttempted/Success/Failure/Aborted",
+      "value" :  "1"
     },
     {
-      "StepNo" :  6,
-      "StepType" :  "rating",
-      "Progress" :  "NotAttempted/Success/Failure/Aborted",
-      "Value" :  "4"
+      "stepNo" :  6,
+      "stepType" :  "rating",
+      "progress" :  "NotAttempted/Success/Failure/Aborted",
+      "value" :  "4"
     },
     {
-      "StepNo" :  7,
-      "StepType" :  "rating",
-      "Progress" :  "NotAttempted/Success/Failure/Aborted",
-      "Value" :  "2"
+      "stepNo" :  7,
+      "stepType" :  "rating",
+      "progress" :  "NotAttempted/Success/Failure/Aborted",
+      "value" :  "2"
     }
 
 
