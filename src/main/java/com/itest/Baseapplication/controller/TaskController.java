@@ -22,15 +22,15 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
-    @ApiOperation(value = "display Tasks information", tags = "task-controller")
-    @GetMapping(value = "/getTasks")
+    @ApiOperation(value = "display Task Steps", tags = "task-controller")
+    @GetMapping(value = "/getSteps")
     public ResponseEntity <LinkedHashMap <String,Object>> getTaask() {
         return  new ResponseEntity <>(taskService.getDummyTask(),HttpStatus.OK);
 
     }
 
-    @ApiOperation(value = "display Tasks information", tags = "task-controller")
-    @PostMapping(value = "/attemptJSON")
+    @ApiOperation(value = "Post the attempt Object of the task containing step information", tags = "task-controller")
+    @PostMapping(value = "/attemptTask")
     public ResponseEntity <String> setAttempt(@RequestBody AttemptTask attemptTask ) {
         System.out.println(attemptTask.toString());
         if(taskService.writeAttemptJSON(attemptTask)) {

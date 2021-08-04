@@ -1,7 +1,7 @@
 {
   "taskID" :  "TASK1",
   "noOfSteps" : 7,
-  "stepList" : [
+  "attemptedStepList" : [
     {
       "stepNo" :  1,
       "stepType" :  "Boolean",
