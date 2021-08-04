@@ -1,0 +1,64 @@
+{
+    "TaskId": "TASK1",
+    "NoOfSteps":7,
+    "StepList":[
+        {
+            "StepNo": 1,
+            "Step": "goto www.facebook.com/login",
+            "StepDescription": "",
+            "StepType": "Boolean",
+            "Value": "true/false"
+        },
+
+        {
+            "StepNo": 2,
+            "Step": "Filter price in range 2000-20000 ",
+            "StepDescription" : "",
+            "StepType": "boolean",
+            "Value": "true/false"
+        },
+
+        {
+            "StepNo": 3,
+            "Step": "set destination from goa to delhi",
+            "StepDescription" : "",
+            "StepType": "boolean",
+            "Value": "true/false"
+        },
+        {
+            "StepNo": 4,
+            "Step": "Book ticket of the flight ",
+            "StepDescription" : "",
+            "StepType": "boolean",
+            "Value": "true/false"
+        },
+        {
+            "StepNo": 5,
+            "Step": "Rate the price filtering interface ",
+            "StepDescription" : "",
+            "StepType": "rating",
+            "Value": "1star-5star"
+        },
+        {
+            "StepNo": 6,
+            "Step": "Rate destination and source filling interface",
+            "StepDescription" : "",
+            "StepType": "rating",
+            "Value": "1star-5star"
+        },
+        {
+            "StepNo": 7,
+            "Step": "Rate Overall Booking ticket of the flight ",
+            "StepDescription" : "",
+            "StepType": "rating",
+            "Value": "1star-5star"
+        }
+
+
+
+
+
+
+    ]
+}
+

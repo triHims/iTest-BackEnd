@@ -1,0 +1,57 @@
+{
+  "TaskID" :  "TASK1",
+  "NoOfSteps" : "7",
+  "StepList" : [
+    {
+      "StepNo" :  1,
+      "StepType" :  "Boolean",
+      "Progress" :  "NotAttempted/Success/Failure/Aborted",
+      "Value" :  "true"
+
+    },
+    {
+      "StepNo" :  2,
+      "StepType" :  "boolean",
+      "Progress" :  "NotAttempted/Success/Failure/Aborted",
+      "Value" :  "false"
+
+    },
+
+    {
+      "StepNo" :  3,
+      "StepType" :  "boolean",
+      "Progress" :  "NotAttempted/Success/Failure/Aborted",
+      "Value" :  "true"
+    },
+    {
+      "StepNo" :  4,
+      "StepType" :  "boolean",
+      "Progress" :  "NotAttempted/Success/Failure/Aborted",
+      "Value" :  "true"
+    },
+    {
+      "StepNo" :  5,
+      "StepType" :  "rating",
+      "Progress" :  "NotAttempted/Success/Failure/Aborted",
+      "Value" :  "1"
+    },
+    {
+      "StepNo" :  6,
+      "StepType" :  "rating",
+      "Progress" :  "NotAttempted/Success/Failure/Aborted",
+      "Value" :  "4"
+    },
+    {
+      "StepNo" :  7,
+      "StepType" :  "rating",
+      "Progress" :  "NotAttempted/Success/Failure/Aborted",
+      "Value" :  "2"
+    }
+
+
+
+
+
+
+  ]
+}
