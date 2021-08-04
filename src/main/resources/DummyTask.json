@@ -1,57 +1,57 @@
 {
-    "TaskId": "TASK1",
-    "NoOfSteps":7,
-    "StepList":[
+    "taskId": "TASK1",
+    "noOfSteps":7,
+    "stepList":[
         {
-            "StepNo": 1,
-            "Step": "goto www.facebook.com/login",
-            "StepDescription": "",
-            "StepType": "Boolean",
-            "Value": "true/false"
+            "stepNo": 1,
+            "step": "goto www.facebook.com/login",
+            "stepDescription": "",
+            "stepType": "boolean",
+            "value": "true/false"
         },
 
         {
-            "StepNo": 2,
-            "Step": "Filter price in range 2000-20000 ",
-            "StepDescription" : "",
-            "StepType": "boolean",
-            "Value": "true/false"
+            "stepNo": 2,
+            "step": "Filter price in range 2000-20000 ",
+            "stepDescription" : "",
+            "stepType": "boolean",
+            "value": "true/false"
         },
 
         {
-            "StepNo": 3,
-            "Step": "set destination from goa to delhi",
-            "StepDescription" : "",
-            "StepType": "boolean",
-            "Value": "true/false"
+            "stepNo": 3,
+            "step": "set destination from goa to delhi",
+            "stepDescription" : "",
+            "stepType": "boolean",
+            "value": "true/false"
         },
         {
-            "StepNo": 4,
-            "Step": "Book ticket of the flight ",
-            "StepDescription" : "",
-            "StepType": "boolean",
-            "Value": "true/false"
+            "stepNo": 4,
+            "step": "Book ticket of the flight ",
+            "stepDescription" : "",
+            "stepType": "boolean",
+            "value": "true/false"
         },
         {
-            "StepNo": 5,
-            "Step": "Rate the price filtering interface ",
-            "StepDescription" : "",
-            "StepType": "rating",
-            "Value": "1star-5star"
+            "stepNo": 5,
+            "step": "Rate the price filtering interface ",
+            "stepDescription" : "",
+            "stepType": "rating",
+            "value": "1star-5star"
         },
         {
-            "StepNo": 6,
-            "Step": "Rate destination and source filling interface",
-            "StepDescription" : "",
-            "StepType": "rating",
-            "Value": "1star-5star"
+            "stepNo": 6,
+            "step": "Rate destination and source filling interface",
+            "stepDescription" : "",
+            "stepType": "rating",
+            "value": "1star-5star"
         },
         {
-            "StepNo": 7,
-            "Step": "Rate Overall Booking ticket of the flight ",
-            "StepDescription" : "",
-            "StepType": "rating",
-            "Value": "1star-5star"
+            "stepNo": 7,
+            "step": "Rate Overall Booking ticket of the flight ",
+            "stepDescription" : "",
+            "stepType": "rating",
+            "value": "1star-5star"
         }
 
 
