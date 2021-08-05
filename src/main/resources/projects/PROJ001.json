@@ -1,0 +1,58 @@
+{
+    "projectId": "PROJ001",
+    "projectName":"Test Project",
+    "dateCreated":"2021-08-04 12:53:57",
+    "projectDescription": "Test description. Test description. Test description. Test description. Test description. Test description.",
+    "leadId": "LEAD001",
+    "projectTaskList":[
+        {
+            "taskID" :  "TASK1",
+            "taskName" : "Test Task",
+            "taskDescription" : "Test Task",
+            "taskURL" : "localhost:8080/testTask",
+            "projectId": "PROJ001",
+            "taskCreator": "LEAD001",
+            "testScript": "test Script",
+            "flag": "IN_PROGRESS",
+            "createdDate": "2021-08-04 12:53:58",
+            "targetDevice": "ANDRIOD, PC"
+        },
+        {
+            "taskID" :  "TASK2",
+            "taskName" : "Test Task",
+            "taskDescription" : "Test Task",
+            "taskURL" : "localhost:8080/testTask",
+            "projectId": "PROJ001",
+            "taskCreator": "LEAD001",
+            "testScript": "test Script",
+            "flag": "IN_PROGRESS",
+            "createdDate": "2021-08-04 12:53:58",
+            "targetDevice": "ANDRIOD, PC"
+        },
+        {
+            "taskID" :  "TASK3",
+            "taskName" : "Test Task",
+            "taskDescription" : "Test Task",
+            "taskURL" : "localhost:8080/testTask",
+            "projectId": "PROJ001",
+            "taskCreator": "LEAD001",
+            "testScript": "test Script",
+            "flag": "IN_PROGRESS",
+            "createdDate": "2021-08-04 12:53:58",
+            "targetDevice": "ANDRIOD, PC"
+        },
+        {
+            "taskID" :  "TASK4",
+            "taskName" : "Test Task",
+            "taskDescription" : "Test Task",
+            "taskURL" : "localhost:8080/testTask",
+            "projectId": "PROJ001",
+            "taskCreator": "LEAD001",
+            "testScript": "test Script",
+            "flag": "IN_PROGRESS",
+            "createdDate": "2021-08-04 12:53:58",
+            "targetDevice": "ANDRIOD, PC"
+        }
+    ]
+}
+

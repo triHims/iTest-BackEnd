@@ -24,7 +24,7 @@ public class TaskController {
 
     @ApiOperation(value = "display Task Steps", tags = "task-controller")
     @GetMapping(value = "/getSteps")
-    public ResponseEntity <LinkedHashMap <String,Object>> getTaask() {
+    public ResponseEntity <LinkedHashMap <String,Object>> getSteps() {
         return  new ResponseEntity <>(taskService.getDummyTask(),HttpStatus.OK);
 
     }
@@ -36,9 +36,6 @@ public class TaskController {
         if(taskService.writeAttemptJSON(attemptTask)) {
             return new ResponseEntity <>("Attempt is Set", HttpStatus.OK);
         }
-
-
         return  new ResponseEntity <>("Error in writing the file",HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }
