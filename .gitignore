@@ -32,5 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
+
+###Extra project files ####
+src/main/resources/attempts/
 .metadata
 bin/
