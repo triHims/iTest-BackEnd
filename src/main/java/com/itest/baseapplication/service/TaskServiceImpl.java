@@ -2,7 +2,9 @@ package com.itest.baseapplication.service;
 
 
 import com.itest.baseapplication.dto.AttemptTaskDTO;
+import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.dto.TaskDTO;
+import com.itest.baseapplication.entity.Task;
 import com.itest.baseapplication.repository.AttemptTaskRepo;
 import com.itest.baseapplication.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +27,20 @@ public class TaskServiceImpl  implements  TaskService{
     private AttemptTaskRepo attemptTaskRepo;
 
     @Override
-    public String  getTaskSteps (Integer taskId)  {
+    public StepDTO  getTaskSteps (Integer taskId)  {
 
-       String steps = taskRepository.getStepsByTaskId(taskId);
-        if(steps!=null)
-            return steps;
-        return "";
+        StepDTO stepDTO = new StepDTO();
+
+       Task task = taskRepository.getByTaskId(taskId);
+
+        if(task==null)
+            return stepDTO;
+       stepDTO.setNoOfSteps(task.getStepCount());
+       stepDTO.setStepList(task.getSteps());
+       stepDTO.setTaskId(task.getTaskId());
+
+
+        return stepDTO;
     }
 
     @Override

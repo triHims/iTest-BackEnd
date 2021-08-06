@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task,Integer> {
-    @Query(value = Queries.GETSTEPBYTASKID)
-    String getStepsByTaskId ( int taskId);
+
+    Task getByTaskId ( int taskId);
 
     List <Task> findByProjectId(String projectId);
 }

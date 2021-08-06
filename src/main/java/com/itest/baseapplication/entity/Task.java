@@ -42,7 +42,7 @@ public class Task {
     @Column(name="target_device")
     private String targetDevice;
     @Column(name="task_step_count")
-    private String stepCount;
+    private int stepCount;
 
 
     public Integer getTaskId () {
@@ -89,7 +89,7 @@ public class Task {
         return targetDevice;
     }
 
-    public String getStepCount () {
+    public int getStepCount () {
         return stepCount;
     }
 }

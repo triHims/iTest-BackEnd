@@ -2,6 +2,7 @@ package com.itest.baseapplication.controller;
 
 
 import com.itest.baseapplication.dto.AttemptTaskDTO;
+import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class TaskController {
 
     @ApiOperation(value = "display Task Steps", tags = "task-controller")
     @GetMapping(value = "/getSteps")
-    public ResponseEntity <String> getSteps(int taskId ) {
+    public ResponseEntity <StepDTO> getSteps(int taskId ) {
         return  new ResponseEntity <>(taskService.getTaskSteps(taskId),HttpStatus.OK);
 
     }
