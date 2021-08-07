@@ -5,9 +5,11 @@ import com.itest.baseapplication.dto.LoginDTO;
 import com.itest.baseapplication.dto.LoginStatusDTO;
 import com.itest.baseapplication.service.UserVerification;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/noauth")
 @CrossOrigin(origins="http://localhost:4200")
@@ -30,6 +32,7 @@ public class NoAuthController {
     @PostMapping(value = "/login")
     public LoginStatusDTO getLogin( @RequestBody LoginDTO loginDTO){
 
+        log.info(String.format("Inside of:: %s from class:: %s", "getLogin","NoAuthController" ));
         return userVerification.giveLogin(loginDTO);
     }
 }

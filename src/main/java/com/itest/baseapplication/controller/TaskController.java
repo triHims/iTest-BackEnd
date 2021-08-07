@@ -7,6 +7,7 @@ import com.itest.baseapplication.dto.TaskDTO;
 import com.itest.baseapplication.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/tasks/")
 @CrossOrigin(origins="http://localhost:4200")
@@ -25,6 +27,7 @@ public class TaskController {
     @ApiOperation(value = "display Task Steps", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(value = "/getSteps")
     public ResponseEntity <StepDTO> getSteps(int taskId ) {
+        log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));
         return  new ResponseEntity <>(taskService.getTaskSteps(taskId),HttpStatus.OK);
 
     }
@@ -33,16 +36,20 @@ public class TaskController {
     @PostMapping(value = "/attemptTask")
     public ResponseEntity <String> setAttempt(@RequestBody AttemptTaskDTO attemptTask ) {
 
+        log.info(String.format("Entered into:: %s from class:: %s", "setAttempt","TaskController" ));
         if(taskService.saveAttemptedTask(attemptTask)) {
+                    log.info(String.format("Exited from:: %s of class:: %s", "getSteps","TaskController" ));
             return new ResponseEntity <>("Attempt is Set", HttpStatus.OK);
         }
-        return  new ResponseEntity <>("Error in writing the file",HttpStatus.INTERNAL_SERVER_ERROR);
+        log.error("Task Write failed");
+        return  new ResponseEntity <>("Error in persisting the entity to DB",HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
     @ApiOperation(value = "display Project Tasks", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(value = "{projectId}/getTasks")
     public ResponseEntity <List <TaskDTO>> getTasks( @PathVariable("projectId") String projectId) {
+        log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));
         return  new ResponseEntity <>(taskService.getAllTasks(projectId),HttpStatus.OK);
     }
 
