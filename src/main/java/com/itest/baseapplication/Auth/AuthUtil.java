@@ -107,7 +107,7 @@ public class AuthUtil {
     }
 
     public Optional<ProfileDTO> verify(String jwtToken) throws  JwtAuthenticationException {
-        System.out.println(jwtToken);
+
         Claims jwtClaim           = null;
         String userName           = null;
 

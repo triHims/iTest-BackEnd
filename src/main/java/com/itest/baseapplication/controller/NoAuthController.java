@@ -29,7 +29,7 @@ public class NoAuthController {
     @ApiOperation(value = "Login a user", tags = "no-auth-controller")
     @PostMapping(value = "/login")
     public LoginStatusDTO getLogin( @RequestBody LoginDTO loginDTO){
-        System.out.println("Reached here");
+
         return userVerification.giveLogin(loginDTO);
     }
 }
