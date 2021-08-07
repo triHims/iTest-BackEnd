@@ -1,5 +1,8 @@
 package com.itest.baseapplication.entity;
 
+import com.itest.baseapplication.util.StringPrefixedSequenceIdGenerator;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,7 +11,16 @@ import java.time.LocalDateTime;
 public class AttemptTask {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "attemp_seq")
+  @GenericGenerator(
+          name="book_seq",
+          strategy = "com.itest.baseapplication.util.StringPrefixedSequenceIdGenerator",
+          parameters = {
+            @org.hibernate.annotations.Parameter(name= StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50"),
+                  @org.hibernate.annotations.Parameter(name= StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "50"),
+                  @org.hibernate.annotations.Parameter(name= StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d"),
+          }
+  )
   @Column(name="attemptId")
   String attemptId;
 
