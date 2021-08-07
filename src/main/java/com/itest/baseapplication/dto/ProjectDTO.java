@@ -7,12 +7,12 @@ import org.modelmapper.ModelMapper;
 import java.time.LocalDateTime;
 
 public class ProjectDTO {
-    String id;
-    String projectName;
-    LocalDateTime createdDate;
-    String leadDeveloperId;
-    String projectDescription;
-    String projectLocation;
+    private String id;
+    private String projectName;
+    private LocalDateTime createdDate;
+    private String leadDeveloperId;
+    private String projectDescription;
+    private String projectLocation;
 
     public String getId () {
         return id;
