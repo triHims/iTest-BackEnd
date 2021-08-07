@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 public class AttemptTask {
 
   @Id
-  @GeneratedValue(generator="system-uuid")
-  @GenericGenerator(name="system-uuid", strategy = "uuid")
-  @Column(name="attemptId")
-  String attemptId;
+  @GeneratedValue(generator = "generator")
+  @GenericGenerator(name = "generator", strategy = "increment")
+  @Column(unique=true, nullable=false, precision=30,name="attemptId")
+  Long attemptId;
 
   @Column(name="task_id")
   int taskId;
@@ -35,7 +35,7 @@ public class AttemptTask {
   String attemptProgressPercentage;
 
 
-  public String getAttemptId () {
+  public Long getAttemptId () {
     return attemptId;
   }
 
@@ -63,7 +63,7 @@ public class AttemptTask {
     return attemptProgressPercentage;
   }
 
-  public void setAttemptId ( String attemptId ) {
+  public void setAttemptId ( Long attemptId ) {
     this.attemptId = attemptId;
   }
 

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class AttemptTaskDTO {
 
-    String attemptId;
+    Long attemptId;
 
     int taskId;
 
@@ -23,7 +23,7 @@ public class AttemptTaskDTO {
     public AttemptTaskDTO () {
     }
 
-    public String getAttemptId () {
+    public Long getAttemptId () {
         return attemptId;
     }
 
@@ -51,7 +51,7 @@ public class AttemptTaskDTO {
         return attemptProgressPercentage;
     }
 
-    public AttemptTaskDTO ( String attemptId, int taskId, String attemptJson, String testerId, LocalDateTime attemptDate, String attemptDuration, String attemptProgressPercentage ) {
+    public AttemptTaskDTO ( Long attemptId, int taskId, String attemptJson, String testerId, LocalDateTime attemptDate, String attemptDuration, String attemptProgressPercentage ) {
         this.attemptId = attemptId;
         this.taskId = taskId;
         this.attemptJson = attemptJson;
