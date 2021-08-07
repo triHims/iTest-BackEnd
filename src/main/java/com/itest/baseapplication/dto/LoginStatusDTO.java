@@ -13,5 +13,5 @@ import java.util.UUID;
 public class LoginStatusDTO implements Serializable {
    private static UUID serialVersionUID = UUID.randomUUID();
    private final boolean loginStatus;
-   private final String seretKey;
+   private final String secretKey;
 }
