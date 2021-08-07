@@ -41,7 +41,7 @@ public class TaskController {
 
 
     @ApiOperation(value = "display Project Tasks", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
-    @GetMapping(value = "{projectId}/gettasks")
+    @GetMapping(value = "{projectId}/getTasks")
     public ResponseEntity <List <TaskDTO>> getTasks( @PathVariable("projectId") String projectId) {
         return  new ResponseEntity <>(taskService.getAllTasks(projectId),HttpStatus.OK);
     }
