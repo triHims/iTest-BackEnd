@@ -11,16 +11,8 @@ import java.time.LocalDateTime;
 public class AttemptTask {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "attemp_seq")
-  @GenericGenerator(
-          name="book_seq",
-          strategy = "com.itest.baseapplication.util.StringPrefixedSequenceIdGenerator",
-          parameters = {
-            @org.hibernate.annotations.Parameter(name= StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50"),
-                  @org.hibernate.annotations.Parameter(name= StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "50"),
-                  @org.hibernate.annotations.Parameter(name= StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d"),
-          }
-  )
+  @GeneratedValue(generator="system-uuid")
+  @GenericGenerator(name="system-uuid", strategy = "uuid")
   @Column(name="attemptId")
   String attemptId;
 
