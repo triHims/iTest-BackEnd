@@ -63,7 +63,6 @@ public class AttemptTaskDTO {
 
     public AttemptTask dtoToTask(){
         AttemptTask attemptTask = new AttemptTask();
-        attemptTask.setAttemptId(this.getAttemptId());
         attemptTask.setAttemptDate(this.getAttemptDate());
         attemptTask.setTaskId(this.getTaskId());
         attemptTask.setAttemptJson(this.getAttemptJson());
