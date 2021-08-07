@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/noauth")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="*")
 public class NoAuthController {
 
 //
