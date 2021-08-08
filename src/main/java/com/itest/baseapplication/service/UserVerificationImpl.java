@@ -37,7 +37,7 @@ public class UserVerificationImpl implements UserVerification {
         Optional <EmpRecords> empRecords = empRecordsRepo.findByUsername(loginDTO.getUsername());
         if (empRecords.isPresent()) {
             EmpRecordsDTO empRecordsDTO = EmpRecordsDTO.getDTOFromEntity(empRecords.get());
-            if (empRecordsDTO.getIsVerified()
+            if (Boolean.TRUE.equals(empRecordsDTO.getIsVerified())
                     && empRecordsDTO.getPassword().equals(loginDTO.getPassword())) {
 
                 HashMap<String,Object> claimsObj = new HashMap <>();

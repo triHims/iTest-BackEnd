@@ -1,6 +1,5 @@
 package com.itest.baseapplication.entity;
 
-import com.itest.baseapplication.util.StringPrefixedSequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

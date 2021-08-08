@@ -1,6 +1,7 @@
 package com.itest.baseapplication.controller;
 
 
+import com.itest.baseapplication.Auth.AuthUtil;
 import com.itest.baseapplication.dto.LoginDTO;
 import com.itest.baseapplication.dto.LoginStatusDTO;
 import com.itest.baseapplication.service.UserVerification;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins="http://localhost:4200")
 public class NoAuthController {
 
-//
+
 //    @Autowired
 //    private AuthUtil authUtil;
 //
