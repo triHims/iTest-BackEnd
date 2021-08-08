@@ -19,8 +19,8 @@ import java.util.Optional;
 @Component
 public class AuthUtil {
 
-    @Value("${yasakani_no_magatama}")
-    private String yasakani_no_magatama="`'FnuFxy%D8WQ1\"FPF$H%&jt#k$AJfAeFp/p.6*&QJ!+?-0m2h-f>JNK0A2|7m51uV}HN1Z4H}T/Ach%Q^!tw&Wpr\",~A(dq(D_C";
+    @Value("${YASAKANI_NO_MAGATAMA}")
+    private String YASAKANI_NO_MAGATAMA;
 
 
 
@@ -36,7 +36,7 @@ public class AuthUtil {
         Date now = new Date(nowMillis);
 
         //We will sign our JWT with our ApiKey secret
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(yasakani_no_magatama);
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(YASAKANI_NO_MAGATAMA);
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         //Let's set the JWT Claims
@@ -77,7 +77,7 @@ public class AuthUtil {
     private Jws <Claims> getDecodedToken ( String token) throws JwtAuthenticationException {
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(yasakani_no_magatama);
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(YASAKANI_NO_MAGATAMA);
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         Jws<Claims> claimsJws= null;

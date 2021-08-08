@@ -1,9 +1,9 @@
 package com.itest.baseapplication.controller;
 
 
-import com.itest.baseapplication.Auth.AuthUtil;
 import com.itest.baseapplication.dto.LoginDTO;
 import com.itest.baseapplication.dto.LoginStatusDTO;
+import com.itest.baseapplication.dto.SignUpDTO;
 import com.itest.baseapplication.service.UserVerification;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -35,5 +35,14 @@ public class NoAuthController {
 
         log.info(String.format("Inside of:: %s from class:: %s", "getLogin","NoAuthController" ));
         return userVerification.giveLogin(loginDTO);
+    }
+
+
+    @ApiOperation(value = "Signup a new user", tags = "no-auth-controller")
+    @PostMapping(value = "/signUp")
+    public String getSigned( @RequestBody SignUpDTO signUpDTO){
+
+        log.info(String.format("Inside of:: %s from class:: %s", "getSigned","NoAuthController" ));
+        return userVerification.doSignUp(signUpDTO);
     }
 }
