@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/tasks/")
-@CrossOrigin(origins={"http://localhost:4200","http://localhost:14060"})
+@CrossOrigin(origins={"http://localhost:4200","http://localhost:14060","http://10.81.64.15:14060","http://10.81.64.15:14059"})
 public class TaskController {
 
     @Autowired
