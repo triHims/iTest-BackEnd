@@ -32,4 +32,6 @@ public class Developer {
     private String location;
 
     private String fullName;
+
+    private byte[] userImg;
 }

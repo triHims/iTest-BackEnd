@@ -38,4 +38,6 @@ public class Admin {
     private String location;
 
     private String fullName;
+
+    private byte[] userImg;
 }
