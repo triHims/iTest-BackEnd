@@ -13,11 +13,8 @@ import com.itest.baseapplication.repository.DeveloperRepo;
 import com.itest.baseapplication.repository.EmpRecordsRepo;
 import com.itest.baseapplication.Auth.AuthUtil;
 import com.itest.baseapplication.repository.TesterRepo;
-import com.itest.baseapplication.util.UserType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +57,7 @@ public class UserVerificationImpl implements UserVerification {
 
                 HashMap<String,Object> claimsObj = new HashMap <>();
                 claimsObj.put("username",empRecordsDTO.getUsername());
+                claimsObj.put("userId",empRecordsDTO.getUserId());
                 claimsObj.put("token_r",
                         authUtil.encodeRole(empRecordsDTO.getRole()));
                 claimsObj.put("fullName",empRecordsDTO.getFullName());
