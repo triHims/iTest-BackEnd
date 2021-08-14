@@ -26,7 +26,6 @@ public class AuthUtil {
 
 
 
-
     public  String createJWT( String id, String issuer, String subject, Map <String,Object> claims) {
         long ttlMillis=28800000;
         //The JWT signature algorithm we will be using to sign the token
@@ -133,8 +132,11 @@ public class AuthUtil {
         }
 
         String fullName=jwtClaim.get("fullName",String.class);
+        String userId=jwtClaim.get("userId",String.class);
 
-        return Optional.of(new ProfileDTO(userName,fullName,role));
+
+
+        return Optional.of(new ProfileDTO(userId,userName,fullName,role));
     }
 
 
