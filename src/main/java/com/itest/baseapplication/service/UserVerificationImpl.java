@@ -46,6 +46,13 @@ public class UserVerificationImpl implements UserVerification {
 //    @Autowired
 //    private AuthenticationManager authenticationManager;
 
+
+
+    @Override
+    public boolean checkUserNameUnique ( String userName ) {
+        return !(empRecordsRepo.findFullNameByUsername(userName).isPresent());
+    }
+
     public LoginStatusDTO giveLogin ( LoginDTO loginDTO ) throws UsernameNotFoundException {
 
         log.info(String.format("Called %s from class %s", "giveLogin","TaskServiceImpl" ));

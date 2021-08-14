@@ -29,6 +29,19 @@ public class NoAuthController {
 
     @Autowired
     private UserVerification userVerification;
+
+
+    @ApiOperation(value = "Check if UserName is unique", tags = "no-auth-controller")
+    @GetMapping(value = "/checkUserName")
+    public boolean CheckUserNameUnique(@RequestParam String username ){
+
+        log.info(String.format("Inside of:: %s from class:: %s", "getLogin","Check UserName Unique" ));
+        return userVerification.checkUserNameUnique(username);
+    }
+
+
+
+
     @ApiOperation(value = "Login a user", tags = "no-auth-controller")
     @PostMapping(value = "/login")
     public LoginStatusDTO getLogin( @RequestBody LoginDTO loginDTO){
