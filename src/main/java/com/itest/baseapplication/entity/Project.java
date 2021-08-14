@@ -1,6 +1,8 @@
 package com.itest.baseapplication.entity;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,7 +10,11 @@ import java.time.LocalDateTime;
 @Table(name="project_table")
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "id-generator")
+    @GenericGenerator(name="id-generator",
+            parameters = @org.hibernate.annotations.Parameter(name="prefix",value = "proj"),
+            strategy = "com.itest.baseapplication.util.IdGenerator"
+    )
     String id;
     @Column(name="project_name")
     String projectName;
