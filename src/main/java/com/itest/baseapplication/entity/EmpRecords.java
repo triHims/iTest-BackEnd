@@ -28,6 +28,8 @@ public class EmpRecords {
 
     private String fullName;
 
+    private byte[] userImg;
+
     @Override
     public String toString () {
         return "EmpRecords{" +
@@ -37,6 +39,7 @@ public class EmpRecords {
                 ", emailId='" + emailId + '\'' +
                 ", isVerified=" + isVerified +
                 ", role='" + role + '\'' +
+                ", userImg='" + "binaryArr" + '\'' +
                 '}';
     }
 }

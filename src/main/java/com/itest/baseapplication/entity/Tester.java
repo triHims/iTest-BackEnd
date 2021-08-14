@@ -34,4 +34,6 @@ public class Tester {
     private String location;
 
     private String fullName;
+
+    private byte[] userImg;
 }

@@ -3,7 +3,6 @@ package com.itest.baseapplication.service;
 
 import com.itest.baseapplication.dto.AttemptTaskDTO;
 import com.itest.baseapplication.dto.ProfileDTO;
-import com.itest.baseapplication.dto.ProjectDTO;
 import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.dto.TaskDTO;
 import com.itest.baseapplication.dto.TesterTaskAttemptDTO;
@@ -96,12 +95,10 @@ public class TaskServiceImpl  implements  TaskService{
         	case "tester":
         		tasks = testerTaskAttemptRepo.findByTaskIdAndTesterId(taskId, empRecord.getUserId().toString()).stream().map(TesterTaskAttemptDTO::dtofromEntity).collect(Collectors.toList());
         		break;
-        	case "developer":        	
+            default:
         		tasks = testerTaskAttemptRepo.findByTaskId(taskId).stream().map(TesterTaskAttemptDTO::dtofromEntity).collect(Collectors.toList());
         		break;
-        	case "admin":
-        		tasks =  testerTaskAttemptRepo.findAll().stream().map(TesterTaskAttemptDTO::dtofromEntity).collect(Collectors.toList());
-        		break;
+
         	}        	
         }
 

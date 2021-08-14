@@ -39,6 +39,8 @@ public class EmpRecordsDTO {
     @NotNull
     private String fullName;
 
+     private byte[] userImg;
+
     public static EmpRecordsDTO getDTOFromEntity( EmpRecords records ){
 
         final ModelMapper mapper  = new ModelMapper();

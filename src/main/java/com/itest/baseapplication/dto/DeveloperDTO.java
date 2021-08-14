@@ -32,6 +32,8 @@ public class DeveloperDTO {
     
     private String fullName;
 
+    private byte[] userImg;
+
     public static DeveloperDTO getDTOFromEntity( Developer developer ){
         final ModelMapper mapper  = new ModelMapper();
         return  mapper.map(developer,DeveloperDTO.class);

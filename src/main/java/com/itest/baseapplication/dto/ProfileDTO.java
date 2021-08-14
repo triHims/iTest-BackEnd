@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ProfileDTO {
+
+    private String userId;
     private String username;
     private String name;
     private String role;

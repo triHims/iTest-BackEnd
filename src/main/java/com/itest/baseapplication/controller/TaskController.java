@@ -58,7 +58,7 @@ public class TaskController {
         return  new ResponseEntity <>(taskService.getAllTasks(projectId),HttpStatus.OK);
     }
     
-    @ApiOperation(value = "display history of Project Tasks", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
+    @ApiOperation(value = "display attempt history of Tasks", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(value = "getHistory")
     public ResponseEntity <List <TesterTaskAttemptDTO>> getTaskHistory( @RequestParam Integer taskid ) {
         log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));

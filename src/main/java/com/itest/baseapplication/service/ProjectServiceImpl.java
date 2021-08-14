@@ -1,33 +1,21 @@
 package com.itest.baseapplication.service;
 
 
+import com.itest.baseapplication.Auth.AuthenticatedProfileHelper;
 import com.itest.baseapplication.dto.DeveloperDTO;
-import com.itest.baseapplication.dto.EmpRecordsDTO;
 import com.itest.baseapplication.dto.ProfileDTO;
 import com.itest.baseapplication.dto.ProjectDTO;
 import com.itest.baseapplication.dto.TaskDTO;
 import com.itest.baseapplication.entity.Developer;
-import com.itest.baseapplication.entity.EmpRecords;
 import com.itest.baseapplication.entity.Project;
 import com.itest.baseapplication.entity.Task;
-import com.itest.baseapplication.repository.DeveloperRepo;
-import com.itest.baseapplication.repository.EmpRecordsRepo;
-import com.itest.baseapplication.repository.ProjectRepository;
-import com.itest.baseapplication.repository.TaskRepository;
-import com.itest.baseapplication.repository.TesterRepo;
+import com.itest.baseapplication.repository.*;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.json.JSONParser;
-import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,7 +34,12 @@ public class ProjectServiceImpl  implements  ProjectService{
     private DeveloperRepo developerRepo;
     @Autowired
     private TesterRepo testerRepo;
-    
+
+    @Autowired
+    private ProjectDeveloperMapperRepo projectDeveloperMapperRepo;
+
+    @Autowired
+    private ProjectTesterMapperRepo projectTesterMapperRepo;
     
     @Override
     public ProjectDTO getProject(String projectId)  {
@@ -74,19 +67,37 @@ public class ProjectServiceImpl  implements  ProjectService{
 
     public List <ProjectDTO> getAllProjects() {
         log.info(String.format("Inside %s from class %s", "getProject","ProjectServiceImpl" ));
-        ProfileDTO profile = (ProfileDTO) SecurityContextHolder.getContext().getAuthentication().getDetails();
+
+        ProfileDTO  profile = new AuthenticatedProfileHelper().getProfile();
+
+
+
+
+        if(profile.getRole().equals("admin"))
+            return projectRepository.findAll().stream().map(ProjectDTO::dtoFromEntity).collect(Collectors.toList());
+
         List<ProjectDTO> projects = new ArrayList<ProjectDTO>();
-        switch(profile.getRole()) {
-        case "developer":
-        	projects = projectRepository.findByLeadDeveloperId(profile.getUser_id()).stream().map(ProjectDTO::dtoFromEntity).collect(Collectors.toList());
-        	break;
-        case "tester":        	
-        	//projects = projectRepository.findAllById(null);
-        	break;
-        case "admin":
-        	projects =  projectRepository.findAll().stream().map(ProjectDTO::dtoFromEntity).collect(Collectors.toList());
-        	break;
+        List<String> allocatedProjectList =new ArrayList <>();
+        List<Project> allProjects=null;
+
+
+
+
+        if(profile.getRole().equals("developer")) {
+            allocatedProjectList = projectDeveloperMapperRepo
+                    .findProjectByDeveloperId(Integer.parseInt(profile.getUserId()));
+        }else  if(profile.getRole().equals("tester")) {
+            allocatedProjectList = projectTesterMapperRepo
+                    .findProjectByTesterId(Integer.parseInt(profile.getUserId()));
         }
-        return projects;
+
+
+
+
+            allProjects = projectRepository.findAllByIdIn(allocatedProjectList);
+
+        	projects = allProjects.stream().map(ProjectDTO::dtoFromEntity).collect(Collectors.toList());
+
+        	return projects;
     }
 }
