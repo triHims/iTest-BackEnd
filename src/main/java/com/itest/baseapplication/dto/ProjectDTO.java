@@ -2,10 +2,17 @@ package com.itest.baseapplication.dto;
 
 
 import com.itest.baseapplication.entity.Project;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Getter
+@Setter
 public class ProjectDTO {
     private String id;
     private String projectName;
@@ -13,55 +20,10 @@ public class ProjectDTO {
     private String leadDeveloperId;
     private String projectDescription;
     private String projectLocation;
-
-    public String getId () {
-        return id;
-    }
-
-    public void setId ( String id ) {
-        this.id = id;
-    }
-
-    public String getProjectName () {
-        return projectName;
-    }
-
-    public void setProjectName ( String projectName ) {
-        this.projectName = projectName;
-    }
-
-    public LocalDateTime getCreatedDate () {
-        return createdDate;
-    }
-
-    public void setCreatedDate ( LocalDateTime createdDate ) {
-        this.createdDate = createdDate;
-    }
-
-    public String getLeadDeveloperId () {
-        return leadDeveloperId;
-    }
-
-    public void setLeadDeveloperId ( String leadDeveloperId ) {
-        this.leadDeveloperId = leadDeveloperId;
-    }
-
-    public String getProjectDescription () {
-        return projectDescription;
-    }
-
-    public void setProjectDescription ( String projectDescription ) {
-        this.projectDescription = projectDescription;
-    }
-
-    public String getProjectLocation () {
-        return projectLocation;
-    }
-
-    public void setProjectLocation ( String projectLocation ) {
-        this.projectLocation = projectLocation;
-    }
-
+    private DeveloperDTO createdBy;
+    private List<TaskDTO> tasks; // No. of tasks created by Dev
+    private Integer attemptedTasks; // Only if its a tester, show the tasks attempted
+    // private List<Tester> assignedTesters; // Doubtful
 
     public static ProjectDTO dtoFromEntity( Project project){
         final ModelMapper mapper = new ModelMapper();

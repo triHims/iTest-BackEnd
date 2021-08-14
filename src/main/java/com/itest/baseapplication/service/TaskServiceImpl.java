@@ -2,17 +2,28 @@ package com.itest.baseapplication.service;
 
 
 import com.itest.baseapplication.dto.AttemptTaskDTO;
+import com.itest.baseapplication.dto.ProfileDTO;
+import com.itest.baseapplication.dto.ProjectDTO;
 import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.dto.TaskDTO;
+import com.itest.baseapplication.dto.TesterTaskAttemptDTO;
+import com.itest.baseapplication.entity.EmpRecords;
 import com.itest.baseapplication.entity.Task;
+import com.itest.baseapplication.entity.TesterTaskAttempt;
 import com.itest.baseapplication.repository.AttemptTaskRepo;
+import com.itest.baseapplication.repository.EmpRecordsRepo;
 import com.itest.baseapplication.repository.TaskRepository;
+import com.itest.baseapplication.repository.TesterTaskAttemptRepo;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -27,6 +38,12 @@ public class TaskServiceImpl  implements  TaskService{
 
     @Autowired
     private AttemptTaskRepo attemptTaskRepo;
+    
+    @Autowired
+    private TesterTaskAttemptRepo testerTaskAttemptRepo;
+    
+    @Autowired
+    private EmpRecordsRepo empRecordsRepo;
 
     @Override
     public StepDTO  getTaskSteps (Integer taskId)  {
@@ -62,4 +79,29 @@ public class TaskServiceImpl  implements  TaskService{
         return taskRepository.findByProjectId(projectId).stream()
                 .map(TaskDTO::dtofromObject).collect(Collectors.toList());
     }
+    
+    public List <TesterTaskAttemptDTO> getTaskHistory(Integer taskId){
+        log.info(String.format("Inside %s from class %s", "getAllTasks","TaskServiceImpl" ));
+        ProfileDTO profile = (ProfileDTO) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        List<TesterTaskAttemptDTO> tasks = new ArrayList<TesterTaskAttemptDTO>();
+        Optional<EmpRecords> emp = empRecordsRepo.findByUsername(profile.getUsername());
+        if(emp.isPresent()) {
+        	EmpRecords empRecord = emp.get();
+        	switch(profile.getRole()) {
+        	case "tester":
+        		tasks = testerTaskAttemptRepo.findByTaskIdAndTesterId(taskId, empRecord.getUserId().toString()).stream().map(TesterTaskAttemptDTO::dtofromEntity).collect(Collectors.toList());
+        		break;
+        	case "developer":        	
+        		tasks = testerTaskAttemptRepo.findByTaskId(taskId).stream().map(TesterTaskAttemptDTO::dtofromEntity).collect(Collectors.toList());
+        		break;
+        	case "admin":
+        		tasks =  testerTaskAttemptRepo.findAll().stream().map(TesterTaskAttemptDTO::dtofromEntity).collect(Collectors.toList());
+        		break;
+        	}        	
+        }
+
+        return tasks;
+    }
+    
+    
 }

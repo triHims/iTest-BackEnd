@@ -30,7 +30,7 @@ public class JwtAuthenticatedProfile implements Authentication {
 
     @Override
     public Object getDetails () {
-        return null;
+    	return (ProfileDTO) profile;
     }
 
     @Override

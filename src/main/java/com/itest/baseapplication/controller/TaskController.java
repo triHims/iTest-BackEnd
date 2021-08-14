@@ -2,8 +2,11 @@ package com.itest.baseapplication.controller;
 
 
 import com.itest.baseapplication.dto.AttemptTaskDTO;
+import com.itest.baseapplication.dto.ProfileDTO;
 import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.dto.TaskDTO;
+import com.itest.baseapplication.dto.TesterTaskAttemptDTO;
+import com.itest.baseapplication.entity.EmpRecords;
 import com.itest.baseapplication.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -11,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,6 +55,13 @@ public class TaskController {
     public ResponseEntity <List <TaskDTO>> getTasks( @PathVariable("projectId") String projectId) {
         log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));
         return  new ResponseEntity <>(taskService.getAllTasks(projectId),HttpStatus.OK);
+    }
+    
+    @ApiOperation(value = "display history of Project Tasks", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
+    @GetMapping(value = "getHistory")
+    public ResponseEntity <List <TesterTaskAttemptDTO>> getTaskHistory( @RequestParam Integer taskid ) {
+        log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));
+        return  new ResponseEntity <>(taskService.getTaskHistory(taskid),HttpStatus.OK);
     }
 
 }

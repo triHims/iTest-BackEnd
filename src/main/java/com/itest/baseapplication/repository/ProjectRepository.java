@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface ProjectRepository extends JpaRepository<Project,String > {
     Optional <Project> findById( String id);
     List <Project> findAll();
+    List <Project> findByLeadDeveloperId(String id);
 }
