@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface EmpRecordsRepo extends JpaRepository<EmpRecords,String> {
     Optional<EmpRecords> findByUsername ( String username);
+    Optional<String> findFullNameByUsername ( String username);
 }
