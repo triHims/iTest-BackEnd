@@ -22,7 +22,7 @@ public class IdGenerator implements IdentifierGenerator, Configurable {
     public Serializable generate( SharedSessionContractImplementor  session, Object table)
             throws HibernateException {
 
-        String query = String.format("select count(*) from Admin", table.getClass().getSimpleName());
+        String query = String.format("select count(*) from %s", table.getClass().getSimpleName());
 
          Object num= session.createQuery(query).list().get(0);
 
