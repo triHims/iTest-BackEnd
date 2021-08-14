@@ -52,5 +52,12 @@ public class TaskDTO {
         return mapper.map(task,TaskDTO.class);
 
     }
+    
+    public Task EntityfromDTO( TaskDTO task){
+        final ModelMapper mapper = new ModelMapper();
+
+        return mapper.map(task,Task.class);
+
+    }
 
 }

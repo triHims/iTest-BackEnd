@@ -9,17 +9,21 @@ import com.itest.baseapplication.dto.TaskDTO;
 import com.itest.baseapplication.dto.TesterTaskAttemptDTO;
 import com.itest.baseapplication.entity.EmpRecords;
 import com.itest.baseapplication.entity.Task;
+import com.itest.baseapplication.entity.Tester;
 import com.itest.baseapplication.entity.TesterTaskAttempt;
 import com.itest.baseapplication.repository.AttemptTaskRepo;
 import com.itest.baseapplication.repository.EmpRecordsRepo;
 import com.itest.baseapplication.repository.TaskRepository;
+import com.itest.baseapplication.repository.TesterRepo;
 import com.itest.baseapplication.repository.TesterTaskAttemptRepo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +48,9 @@ public class TaskServiceImpl  implements  TaskService{
     
     @Autowired
     private EmpRecordsRepo empRecordsRepo;
+    
+    @Autowired
+    private TesterRepo testerRepo;
 
     @Override
     public StepDTO  getTaskSteps (Integer taskId)  {
@@ -69,8 +76,6 @@ public class TaskServiceImpl  implements  TaskService{
         log.info(String.format("Called %s from class %s", "saveAttempedTask","TaskServiceImpl" ));
         attemptTaskRepo.saveAndFlush(attemptObject.dtoToTask());
         return true;
-
-
     }
 
 
@@ -102,6 +107,39 @@ public class TaskServiceImpl  implements  TaskService{
 
         return tasks;
     }
+    
+    @Override
+    public String addTask ( TaskDTO task) {
+        log.info(String.format("Called %s from class %s", "saveAttempedTask","TaskServiceImpl" ));
+        ProfileDTO profile = (ProfileDTO) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        if(!profile.getRole().equals("tester")) {
+        	if(task.getCreatedDate()==null){
+        		task.setCreatedDate(LocalDateTime.now());        		
+        	}
+        	taskRepository.saveAndFlush(task.EntityfromDTO(task));        
+        	return "Successfully Added Task.";
+        }
+        return "Tester cannot add task.";
+    }
+    
+    @Override
+    public List<TesterTaskAttempt> taskAttempts (Long testerId) {
+        log.info(String.format("Called %s from class %s", "taskAttempts","TaskServiceImpl" ));
+        ProfileDTO profile = (ProfileDTO) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        List<TesterTaskAttempt> testerTaskAttempts = new ArrayList<TesterTaskAttempt>();
+        if(profile.getRole().equals("tester")) {
+        	Optional<EmpRecords> emp = empRecordsRepo.findByUsername(profile.getUsername());
+        	testerTaskAttempts = testerTaskAttemptRepo.findByTesterId(emp.get().getUserId().toString());     
+        } else if(testerId!=null) {
+        	 Optional<Tester> tester = testerRepo.findByTesterId(testerId);
+        	 if(tester.isPresent()) {
+        		 testerTaskAttempts = testerTaskAttemptRepo.findByTesterId(testerId.toString());
+        	 }
+        }
+        return testerTaskAttempts;
+    }
+    
+    
     
     
 }

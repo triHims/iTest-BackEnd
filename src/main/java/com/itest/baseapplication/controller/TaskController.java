@@ -7,6 +7,7 @@ import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.dto.TaskDTO;
 import com.itest.baseapplication.dto.TesterTaskAttemptDTO;
 import com.itest.baseapplication.entity.EmpRecords;
+import com.itest.baseapplication.entity.TesterTaskAttempt;
 import com.itest.baseapplication.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -62,6 +63,20 @@ public class TaskController {
     public ResponseEntity <List <TesterTaskAttemptDTO>> getTaskHistory( @RequestParam Integer taskid ) {
         log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));
         return  new ResponseEntity <>(taskService.getTaskHistory(taskid),HttpStatus.OK);
+    }
+    
+    @ApiOperation(value = "Add a new task", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
+    @PostMapping(value = "/addTask")
+    public ResponseEntity <String> addTask(@RequestBody TaskDTO task ) {
+        log.info(String.format("Entered into:: %s from class:: %s", "addTask","TaskController" ));
+        return new ResponseEntity <>(taskService.addTask(task), HttpStatus.OK);
+    }
+    
+    @ApiOperation(value = "Number of tasks attempted by Tester", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
+    @PostMapping(value = "/findAttempts")
+    public ResponseEntity <List<TesterTaskAttempt>> taskAttempts(@RequestParam Long testerId) {
+        log.info(String.format("Entered into:: %s from class:: %s", "taskAttempts","TaskController" ));
+        return new ResponseEntity <>(taskService.taskAttempts(testerId), HttpStatus.OK);
     }
 
 }

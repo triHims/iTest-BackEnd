@@ -15,4 +15,5 @@ public interface TesterTaskAttemptRepo extends JpaRepository<TesterTaskAttempt,I
 	Integer countTaskAttempted(String testerId);
 	List<TesterTaskAttempt> findByTaskId(Integer taskId);
 	List<TesterTaskAttempt> findByTaskIdAndTesterId(Integer taskId, String testerId);
+	List<TesterTaskAttempt> findByTesterId(String testerId);
 }

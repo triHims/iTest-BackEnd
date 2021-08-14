@@ -2,10 +2,16 @@ package com.itest.baseapplication.entity;
 
 
 import javax.persistence.*;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="task_table")
+@Getter
+@Setter
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,52 +50,4 @@ public class Task {
     @Column(name="task_step_count")
     private int stepCount;
 
-
-    public Integer getTaskId () {
-        return taskId;
-    }
-
-    public String getTaskName () {
-        return taskName;
-    }
-
-    public String getTaskDescription () {
-        return taskDescription;
-    }
-
-    public String getTaskUrl () {
-        return taskUrl;
-    }
-
-    public String getProjectId () {
-        return projectId;
-    }
-
-    public String getTaskCreator () {
-        return taskCreator;
-    }
-
-    public String getSteps () {
-        return steps;
-    }
-
-    public String getFlag () {
-        return flag;
-    }
-
-    public LocalDateTime getCreatedDate () {
-        return createdDate;
-    }
-
-    public LocalDateTime getTargetDate () {
-        return targetDate;
-    }
-
-    public String getTargetDevice () {
-        return targetDevice;
-    }
-
-    public int getStepCount () {
-        return stepCount;
-    }
 }
