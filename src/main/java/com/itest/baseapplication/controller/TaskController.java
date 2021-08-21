@@ -1,7 +1,6 @@
 package com.itest.baseapplication.controller;
 
 
-import com.itest.baseapplication.dto.AttemptTaskDTO;
 import com.itest.baseapplication.dto.ProfileDTO;
 import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.dto.TaskDTO;
@@ -29,7 +28,7 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
-    @ApiOperation(value = "display Task Steps", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
+    @ApiOperation(value = "You want to get the steps which a particular task contains.", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(value = "/getSteps")
     public ResponseEntity <StepDTO> getSteps(int taskId ) {
         log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));
@@ -39,7 +38,7 @@ public class TaskController {
 
     @ApiOperation(value = "Post the attempt Object of the task containing step information", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
     @PostMapping(value = "/attemptTask")
-    public ResponseEntity <String> setAttempt(@RequestBody AttemptTaskDTO attemptTask ) {
+    public ResponseEntity <String> setAttempt(@RequestBody TesterTaskAttemptDTO attemptTask ) {
 
         log.info(String.format("Entered into:: %s from class:: %s", "setAttempt","TaskController" ));
         if(taskService.saveAttemptedTask(attemptTask)) {
@@ -51,7 +50,7 @@ public class TaskController {
     }
 
 
-    @ApiOperation(value = "display Project Tasks", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
+    @ApiOperation(value = "You want get all the task details of a project", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(value = "{projectId}/getTasks")
     public ResponseEntity <List <TaskDTO>> getTasks( @PathVariable("projectId") String projectId) {
         log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));

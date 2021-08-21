@@ -23,14 +23,14 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
-    @ApiOperation(value = "display whole project details", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
+    @ApiOperation(value = "You have a projectId you want to get the details about it.", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(value = "/{projectId}")
     public ResponseEntity <ProjectDTO> getProject( @PathVariable("projectId") String projectId) {
         log.info(String.format("Inside of:: %s from class:: %s", "getProject","ProjectController" ));
         return  new ResponseEntity <>(projectService.getProject(projectId),HttpStatus.OK);
     }
 
-    @ApiOperation(value = "get all the project details.", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
+    @ApiOperation(value = "You want to know how many projects are related to the particular user.", tags = "project-controller", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(value = "/all")
     public ResponseEntity <List <ProjectDTO>> getAllProjects() {
         log.info(String.format("Inside of:: %s from class:: %s", "getAllProject","ProjectController" ));
