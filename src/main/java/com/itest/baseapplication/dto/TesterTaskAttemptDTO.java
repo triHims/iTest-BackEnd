@@ -29,6 +29,8 @@ private Integer attemptId;
     
     private Integer attemptProgressPercentage;
 
+    private String attemptFileName;
+
     public static TesterTaskAttemptDTO dtofromEntity( TesterTaskAttempt testerTaskAttempt){
         final ModelMapper mapper = new ModelMapper();
 

@@ -34,4 +34,6 @@ public class TesterTaskAttempt {
     
     @Column(name = "attempt_progress_percentage")
     private Integer attemptProgressPercentage;
+
+    private String attemptFileName;
 }
