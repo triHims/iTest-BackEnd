@@ -71,12 +71,5 @@ public class TaskController {
         log.info(String.format("Entered into:: %s from class:: %s", "addTask","TaskController" ));
         return new ResponseEntity <>(taskService.addTask(task), HttpStatus.OK);
     }
-    
-    @ApiOperation(value = "Number of tasks attempted by Tester", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
-    @PostMapping(value = "/findAttempts")
-    public ResponseEntity <List<TesterTaskAttempt>> taskAttempts(@RequestParam Long testerId) {
-        log.info(String.format("Entered into:: %s from class:: %s", "taskAttempts","TaskController" ));
-        return new ResponseEntity <>(taskService.taskAttempts(testerId), HttpStatus.OK);
-    }
 
 }

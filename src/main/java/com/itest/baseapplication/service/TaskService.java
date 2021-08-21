@@ -7,6 +7,7 @@ import com.itest.baseapplication.dto.TesterTaskAttemptDTO;
 import com.itest.baseapplication.entity.TesterTaskAttempt;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface TaskService {
@@ -20,5 +21,7 @@ public interface TaskService {
 
 	public List <TesterTaskAttemptDTO> getTaskHistory(Integer taskid);
 	
-	List<TesterTaskAttempt> taskAttempts(Long testerId);
+	List<TesterTaskAttemptDTO> allTasksAttemptsByTesterId ( Long testerId);
+
+    Map <String,Object> countAttemptedAndTotalTasks( String projectId, int testerId);
 }

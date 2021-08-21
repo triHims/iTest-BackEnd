@@ -10,12 +10,14 @@ import com.itest.baseapplication.entity.EmpRecords;
 import com.itest.baseapplication.entity.Task;
 import com.itest.baseapplication.entity.Tester;
 import com.itest.baseapplication.entity.TesterTaskAttempt;
+import com.itest.baseapplication.projection.AttemptStat;
 import com.itest.baseapplication.repository.AttemptTaskRepo;
 import com.itest.baseapplication.repository.EmpRecordsRepo;
 import com.itest.baseapplication.repository.TaskRepository;
 import com.itest.baseapplication.repository.TesterRepo;
 import com.itest.baseapplication.repository.TesterTaskAttemptRepo;
 
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,9 +26,7 @@ import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -85,7 +85,7 @@ public class TaskServiceImpl  implements  TaskService{
     }
     
     public List <TesterTaskAttemptDTO> getTaskHistory(Integer taskId){
-        log.info(String.format("Inside %s from class %s", "getAllTasks","TaskServiceImpl" ));
+        log.info(String.format("Inside %s from class %s", "getTaskHistory","TaskServiceImpl" ));
         ProfileDTO profile = (ProfileDTO) SecurityContextHolder.getContext().getAuthentication().getDetails();
         List<TesterTaskAttemptDTO> tasks = new ArrayList<TesterTaskAttemptDTO>();
         Optional<EmpRecords> emp = empRecordsRepo.findByUsername(profile.getUsername());
@@ -102,12 +102,14 @@ public class TaskServiceImpl  implements  TaskService{
         	}        	
         }
 
+        log.info(String.format("Exit %s from class %s", "getTaskHistory","TaskServiceImpl" ));
+
         return tasks;
     }
     
     @Override
     public String addTask ( TaskDTO task) {
-        log.info(String.format("Called %s from class %s", "saveAttempedTask","TaskServiceImpl" ));
+        log.info(String.format("Called %s from class %s", "addTask","TaskServiceImpl" ));
         ProfileDTO profile = (ProfileDTO) SecurityContextHolder.getContext().getAuthentication().getDetails();
         if(!profile.getRole().equals("tester")) {
         	if(task.getCreatedDate()==null){
@@ -120,23 +122,39 @@ public class TaskServiceImpl  implements  TaskService{
     }
     
     @Override
-    public List<TesterTaskAttempt> taskAttempts (Long testerId) {
-        log.info(String.format("Called %s from class %s", "taskAttempts","TaskServiceImpl" ));
+    public List<TesterTaskAttemptDTO> allTasksAttemptsByTesterId ( Long testerId) {
+        log.info(String.format("Called %s from class %s", "allTasksAttemptsByTesterId","TaskServiceImpl" ));
         ProfileDTO profile = (ProfileDTO) SecurityContextHolder.getContext().getAuthentication().getDetails();
         List<TesterTaskAttempt> testerTaskAttempts = new ArrayList<TesterTaskAttempt>();
         if(profile.getRole().equals("tester")) {
-        	Optional<EmpRecords> emp = empRecordsRepo.findByUsername(profile.getUsername());
-        	testerTaskAttempts = testerTaskAttemptRepo.findByTesterId(emp.get().getUserId().toString());     
+        	testerTaskAttempts = testerTaskAttemptRepo.findByTesterId(profile.getUserId());
         } else if(testerId!=null) {
         	 Optional<Tester> tester = testerRepo.findByTesterId(testerId);
         	 if(tester.isPresent()) {
         		 testerTaskAttempts = testerTaskAttemptRepo.findByTesterId(testerId.toString());
         	 }
         }
-        return testerTaskAttempts;
+
+        log.info(String.format("Exit %s from class %s", "allTasksAttemptsByTesterId","TaskServiceImpl" ));
+        return testerTaskAttempts.stream().map(TesterTaskAttemptDTO::dtofromEntity)
+                .collect(Collectors.toList());
     }
     
-    
+    public Map <String, Object> countAttemptedAndTotalTasks ( String projectId, int testerId ) {
+        log.info(String.format("Called %s from class %s", "countAttemptedAndTotalTasks","TaskServiceImpl" ));
+
+        Map<String, Integer> attempt = testerTaskAttemptRepo.countAttemptedToTotalTasks(projectId,testerId);
+
+
+        Map<String,Object> ret = new HashMap <>();
+        ret.put("totalTasks",attempt.get("attempted_tasks"));
+        ret.put("attemptedTasks",attempt.get("total_tasks"));
+
+
+        log.info(String.format("Exit %s from class %s", "countAttemptedAndTotalTasks","TaskServiceImpl" ));
+        return ret;
+
+    }
     
     
 }
