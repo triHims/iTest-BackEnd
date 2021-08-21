@@ -38,4 +38,11 @@ private Integer attemptId;
 
     }
 
+    public static TesterTaskAttempt entityFromDTO( TesterTaskAttemptDTO testerTaskAttemptDTO){
+        final ModelMapper mapper = new ModelMapper();
+
+        return mapper.map(testerTaskAttemptDTO,TesterTaskAttempt.class);
+
+    }
+
 }

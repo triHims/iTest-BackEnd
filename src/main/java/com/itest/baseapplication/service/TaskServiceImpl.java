@@ -1,7 +1,6 @@
 package com.itest.baseapplication.service;
 
 
-import com.itest.baseapplication.dto.AttemptTaskDTO;
 import com.itest.baseapplication.dto.ProfileDTO;
 import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.dto.TaskDTO;
@@ -10,8 +9,6 @@ import com.itest.baseapplication.entity.EmpRecords;
 import com.itest.baseapplication.entity.Task;
 import com.itest.baseapplication.entity.Tester;
 import com.itest.baseapplication.entity.TesterTaskAttempt;
-import com.itest.baseapplication.projection.AttemptStat;
-import com.itest.baseapplication.repository.AttemptTaskRepo;
 import com.itest.baseapplication.repository.EmpRecordsRepo;
 import com.itest.baseapplication.repository.TaskRepository;
 import com.itest.baseapplication.repository.TesterRepo;
@@ -40,7 +37,7 @@ public class TaskServiceImpl  implements  TaskService{
     private TaskRepository taskRepository;
 
     @Autowired
-    private AttemptTaskRepo attemptTaskRepo;
+    private TesterTaskAttemptRepo attemptTaskRepo;
     
     @Autowired
     private TesterTaskAttemptRepo testerTaskAttemptRepo;
@@ -71,9 +68,9 @@ public class TaskServiceImpl  implements  TaskService{
     }
 
     @Override
-    public boolean saveAttemptedTask ( AttemptTaskDTO attemptObject) {
+    public boolean saveAttemptedTask ( TesterTaskAttemptDTO attemptObject) {
         log.info(String.format("Called %s from class %s", "saveAttempedTask","TaskServiceImpl" ));
-        attemptTaskRepo.saveAndFlush(attemptObject.dtoToTask());
+        attemptTaskRepo.saveAndFlush(TesterTaskAttemptDTO.entityFromDTO(attemptObject));
         return true;
     }
 

@@ -1,6 +1,5 @@
 package com.itest.baseapplication.service;
 
-import com.itest.baseapplication.dto.AttemptTaskDTO;
 import com.itest.baseapplication.dto.StepDTO;
 import com.itest.baseapplication.dto.TaskDTO;
 import com.itest.baseapplication.dto.TesterTaskAttemptDTO;
@@ -13,7 +12,7 @@ import java.util.Map;
 public interface TaskService {
     StepDTO getTaskSteps ( Integer taskId) ;
 
-    boolean saveAttemptedTask( AttemptTaskDTO attemptObject);
+    boolean saveAttemptedTask( TesterTaskAttemptDTO attemptObject);
     
     String addTask( TaskDTO task);
 

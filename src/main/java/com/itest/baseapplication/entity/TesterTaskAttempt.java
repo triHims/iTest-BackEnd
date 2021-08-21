@@ -13,9 +13,12 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class TesterTaskAttempt {
-    
-	@Id
-    private Integer attemptId;
+
+    @Id
+    @GeneratedValue(generator = "generator")
+    @GenericGenerator(name = "generator", strategy = "increment")
+    @Column(unique=true, nullable=false, precision=30,name="attemptId")
+    private Long attemptId;
     
     @Column(name = "task_id")
     private Integer taskId;
