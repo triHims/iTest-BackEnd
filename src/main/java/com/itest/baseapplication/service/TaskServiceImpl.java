@@ -152,8 +152,8 @@ public class TaskServiceImpl  implements  TaskService{
 
 
         Map<String,Object> ret = new HashMap <>();
-        ret.put("totalTasks",attempt.get("attempted_tasks"));
-        ret.put("attemptedTasks",attempt.get("total_tasks"));
+        ret.put("totalTasks",attempt.get("total_tasks"));
+        ret.put("attemptedTasks",attempt.get("attempted_tasks"));
 
 
         log.info(String.format("Exit %s from class %s", "countAttemptedAndTotalTasks","TaskServiceImpl" ));
