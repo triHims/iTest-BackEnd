@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class TesterTaskAttemptDTO {
-private Integer attemptId;
+private Long attemptId;
     
     private Integer taskId;
     

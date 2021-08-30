@@ -1,19 +1,14 @@
 package com.itest.baseapplication.repository;
 
-import com.itest.baseapplication.entity.Tester;
 import com.itest.baseapplication.entity.TesterTaskAttempt;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-
+import com.itest.baseapplication.projection.TesterTaskAttempExtendedProj;
 import com.itest.baseapplication.util.Queries;
-import io.swagger.models.auth.In;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface TesterTaskAttemptRepo extends JpaRepository<TesterTaskAttempt,Integer> {
@@ -21,8 +16,8 @@ public interface TesterTaskAttemptRepo extends JpaRepository<TesterTaskAttempt,I
 	@Query("select count(*) from TesterTaskAttempt where testerId = :testerId")
 	Integer countTaskAttempted(String testerId);
 
-
-	List<TesterTaskAttempt> findByTaskId(Integer taskId);
+	@Query(value = Queries.GETTASKSWITHUSERNAME,nativeQuery = true)
+	List<TesterTaskAttempExtendedProj> findByTaskIdWithTesterUserName( Integer taskId);
 
 	List<TesterTaskAttempt> findByTaskIdAndTesterId(Integer taskId, String testerId);
 

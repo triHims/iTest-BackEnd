@@ -7,6 +7,7 @@ import com.itest.baseapplication.dto.TaskDTO;
 import com.itest.baseapplication.dto.TesterTaskAttemptDTO;
 import com.itest.baseapplication.entity.EmpRecords;
 import com.itest.baseapplication.entity.TesterTaskAttempt;
+import com.itest.baseapplication.model.TesterTaskAttemptExtended;
 import com.itest.baseapplication.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -59,7 +60,7 @@ public class TaskController {
     
     @ApiOperation(value = "display attempt history of Tasks", tags = "task-controller", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(value = "getHistory")
-    public ResponseEntity <List <TesterTaskAttemptDTO>> getTaskHistory( @RequestParam Integer taskid ) {
+    public ResponseEntity <List <TesterTaskAttemptExtended>> getTaskHistory( @RequestParam Integer taskid ) {
         log.info(String.format("Inside of:: %s from class:: %s", "getSteps","TaskController" ));
         return  new ResponseEntity <>(taskService.getTaskHistory(taskid),HttpStatus.OK);
     }

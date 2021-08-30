@@ -9,17 +9,17 @@ import com.itest.baseapplication.entity.EmpRecords;
 import com.itest.baseapplication.entity.Task;
 import com.itest.baseapplication.entity.Tester;
 import com.itest.baseapplication.entity.TesterTaskAttempt;
+import com.itest.baseapplication.model.TesterTaskAttemptExtended;
 import com.itest.baseapplication.repository.EmpRecordsRepo;
 import com.itest.baseapplication.repository.TaskRepository;
 import com.itest.baseapplication.repository.TesterRepo;
 import com.itest.baseapplication.repository.TesterTaskAttemptRepo;
 
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -81,19 +81,27 @@ public class TaskServiceImpl  implements  TaskService{
                 .map(TaskDTO::dtofromObject).collect(Collectors.toList());
     }
     
-    public List <TesterTaskAttemptDTO> getTaskHistory(Integer taskId){
+    public List <TesterTaskAttemptExtended> getTaskHistory(Integer taskId){
+
+
+
         log.info(String.format("Inside %s from class %s", "getTaskHistory","TaskServiceImpl" ));
         ProfileDTO profile = (ProfileDTO) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        List<TesterTaskAttemptDTO> tasks = new ArrayList<TesterTaskAttemptDTO>();
+        List<TesterTaskAttemptExtended> tasks = new ArrayList<>();
         Optional<EmpRecords> emp = empRecordsRepo.findByUsername(profile.getUsername());
         if(emp.isPresent()) {
         	EmpRecords empRecord = emp.get();
         	switch(profile.getRole()) {
         	case "tester":
-        		tasks = testerTaskAttemptRepo.findByTaskIdAndTesterId(taskId, empRecord.getUserId().toString()).stream().map(TesterTaskAttemptDTO::dtofromEntity).collect(Collectors.toList());
+        		tasks = testerTaskAttemptRepo.findByTaskIdAndTesterId(taskId, empRecord.getUserId().toString()).stream().map(r->{
+                    TesterTaskAttemptExtended taskTemp = TesterTaskAttemptExtended.convertFromTesterTaskAttemptDTO(r);
+                    taskTemp.setTesterUsername(profile.getUsername());
+                    return taskTemp;
+                }).collect(Collectors.toList());
         		break;
             default:
-        		tasks = testerTaskAttemptRepo.findByTaskId(taskId).stream().map(TesterTaskAttemptDTO::dtofromEntity).collect(Collectors.toList());
+        		tasks = testerTaskAttemptRepo.findByTaskIdWithTesterUserName(taskId).stream().
+                        map(TesterTaskAttemptExtended::convertFromTesterTaskAttempt).collect(Collectors.toList());
         		break;
 
         	}        	
