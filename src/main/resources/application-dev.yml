@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://10.81.64.121:3356/itestdb
-    username: kami
-    password: "[-htmr:}bNq6E-KF"
+    url: jdbc:postgresql://ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/d43hslk0tpt2gj
+    username: cpumfmwbzejstw
+    password: 829106d0d4b90c88fb1bd4387a209240d31ca349a9a339d0f41c8d6b3467f584
   jpa:
     generate-ddl: false
 

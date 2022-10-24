@@ -55,7 +55,7 @@ public class UserVerificationImpl implements UserVerification {
 
     public LoginStatusDTO giveLogin ( LoginDTO loginDTO ) throws UsernameNotFoundException {
 
-        log.info(String.format("Called %s from class %s", "giveLogin","TaskServiceImpl" ));
+        log.info(String.format("Called %s from class %s", "giveLogin","UserVerificationImpl" ));
         Optional <EmpRecords> empRecords = empRecordsRepo.findByUsername(loginDTO.getUsername());
         if (empRecords.isPresent()) {
             EmpRecordsDTO empRecordsDTO = EmpRecordsDTO.getDTOFromEntity(empRecords.get());
@@ -75,7 +75,7 @@ public class UserVerificationImpl implements UserVerification {
 //                        new UsernamePasswordAuthenticationToken(empRecordsDTO.getUsername(),
 //                                empRecordsDTO.getPassword())
 //                );
-        log.info(String.format("Exiting from %s of class %s", "giveLogin","TaskServiceImpl" ));
+        log.info(String.format("Exiting from %s of class %s", "giveLogin","UserVerificationImpl" ));
                 return new LoginStatusDTO(true,token);
             }
         }
@@ -85,13 +85,13 @@ public class UserVerificationImpl implements UserVerification {
 
     @Override
     public String doSignUp ( SignUpDTO signUpDTO ) {
-        log.info(String.format("Called %s from class %s", "doSignUp","TaskServiceImpl" ));
+        log.info(String.format("Called %s from class %s", "doSignUp","UserVerificationImpl" ));
       switch (signUpDTO.getUserType()){
           case ADMIN: return signAdmin(signUpDTO);
           case DEVELOPER: return signDev(signUpDTO);
           case TESTER: return signTest(signUpDTO);
       }
-        log.error(String.format("Problem on %s of class %s, Signup failed", "giveLogin","TaskServiceImpl" ));
+        log.error(String.format("Problem on %s of class %s, Signup failed", "giveLogin","UserVerificationImpl" ));
       return "Sign up failed";
     }
 
@@ -101,10 +101,10 @@ public class UserVerificationImpl implements UserVerification {
             Developer dev = signUpDTO.getDeveloperEntity();
 
             dev.setIsVerified(1);
-            dev.setAgeRange(giveAgeRange(dev.getDob()));
+//            dev.setAgeRange(giveAgeRange(dev.getDob()));
 
             dev = developerRepo.saveAndFlush(dev);
-            return dev.getDeveloperId().toString();
+            return dev.getDeveloperId();
     }
     private String signTest(SignUpDTO signUpDTO){
         Tester tester = signUpDTO.getTesterEntity();

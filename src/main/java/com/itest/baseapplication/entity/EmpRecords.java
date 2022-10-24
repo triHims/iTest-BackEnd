@@ -3,15 +3,18 @@ package com.itest.baseapplication.entity;
 
 import com.sun.istack.NotNull;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="emp_records")
 @Getter
+@ToString
 public class EmpRecords {
     @Id
     private String userId;
@@ -26,20 +29,13 @@ public class EmpRecords {
 
     private String role;
 
+    private LocalDateTime dob;
+
     private String fullName;
+
+    private String location;
 
     private byte[] userImg;
 
-    @Override
-    public String toString () {
-        return "EmpRecords{" +
-                "userId='" + userId + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", emailId='" + emailId + '\'' +
-                ", isVerified=" + isVerified +
-                ", role='" + role + '\'' +
-                ", userImg='" + "binaryArr" + '\'' +
-                '}';
-    }
+
 }

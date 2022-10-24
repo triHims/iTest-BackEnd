@@ -47,7 +47,8 @@ public class JWTRequestFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) {
 
 
-        return skipUrls.stream().anyMatch(p -> pathMatcher.match(p, request.getServletPath()));
+        boolean value =  skipUrls.stream().anyMatch(p -> pathMatcher.match(p, request.getServletPath()));
+        return value;
     }
 
     @Override

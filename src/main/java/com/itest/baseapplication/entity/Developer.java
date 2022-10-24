@@ -2,6 +2,7 @@ package com.itest.baseapplication.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,8 +14,13 @@ import java.time.LocalDate;
 public class Developer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long developerId;
+    @GeneratedValue(generator = "id-generator")
+    @GenericGenerator(name="id-generator",
+            parameters = @org.hibernate.annotations.Parameter(name="prefix",value = "dev"),
+            strategy = "com.itest.baseapplication.util.IdGenerator"
+    )
+    @Column(name = "developer_id",unique=true,columnDefinition="VARCHAR(45)")
+   private String developerId;
 
     private String username;
 
@@ -22,10 +28,8 @@ public class Developer {
 
     private String emailId;
 
-    @Column(name="isVerified")
-    private int isVerified;
 
-    private String ageRange;
+    private int isVerified;
 
     private LocalDate dob;
 

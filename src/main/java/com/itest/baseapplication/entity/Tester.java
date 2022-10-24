@@ -22,7 +22,6 @@ public class Tester {
 
     private String emailId;
 
-    @Column(name="isVerified")
     private int isVerified;
 
     private String ageRange;
